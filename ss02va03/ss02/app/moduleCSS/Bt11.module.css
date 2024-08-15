@@ -1,0 +1,62 @@
+.datePicker {
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.weekdays,
+.days {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.weekday,
+.day {
+    width: 14.28%;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+
+.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+}
+
+.today {
+    border: 2px solid #ff6347;
+    border-radius: 50%;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #ddd;
+}

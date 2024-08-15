@@ -12,6 +12,7 @@ import Bt9 from "./components/Bt9";
 import Bt8 from "./components/Bt8";
 import Bt6 from "./components/Bt6";
 import Bt10 from "./components/Bt10";
+import Bt11 from "./components/Bt11";
 
 export default function page() {
   return (
@@ -29,7 +30,7 @@ export default function page() {
       <Bt8 />
       <Bt9></Bt9>
       <Bt10></Bt10>
-      
+      <Bt11/>
     </div>
   );
 }
