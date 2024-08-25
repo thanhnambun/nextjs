@@ -42,40 +42,40 @@ export async function GET() {
   }
 }
 
-export async function DELETE(req: NextRequest) {
-  try {
-    // Lấy ID sản phẩm từ URL query
-    const url = new URL(req.url);
-    const productId = url.searchParams.get("id");
+  export async function DELETE(req: NextRequest) {
+    try {
+      // Lấy ID sản phẩm từ URL query
+      const url = new URL(req.url);
+      const productId = url.searchParams.get("id");
 
-    if (!productId) {
-      return NextResponse.json(
-        { error: "ID sản phẩm không được cung cấp" },
-        { status: 400 }
+      if (!productId) {
+        return NextResponse.json(
+          { error: "ID sản phẩm không được cung cấp" },
+          { status: 400 }
+        );
+      }
+
+      // Đường dẫn tới file products.json
+      const filePath = path.join(process.cwd(), "database", "product.json");
+
+      // Đọc dữ liệu từ file products.json
+      const products = JSON.parse(fs.readFileSync(filePath, "utf8"));
+
+      // Lọc bỏ sản phẩm có ID cần xóa
+      const updatedProducts = products.filter(
+        (product: { id: number }) => product.id !== parseInt(productId)
       );
+
+      // Ghi lại mảng sản phẩm đã cập nhật vào file products.json
+      fs.writeFileSync(filePath, JSON.stringify(updatedProducts), "utf8");
+
+      // Trả về danh sách sản phẩm mới sau khi đã xóa
+      return NextResponse.json(updatedProducts);
+    } catch (error: any) {
+      // Trả về phản hồi lỗi
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
-
-    // Đường dẫn tới file products.json
-    const filePath = path.join(process.cwd(), "database", "product.json");
-
-    // Đọc dữ liệu từ file products.json
-    const products = JSON.parse(fs.readFileSync(filePath, "utf8"));
-
-    // Lọc bỏ sản phẩm có ID cần xóa
-    const updatedProducts = products.filter(
-      (product: { id: number }) => product.id !== parseInt(productId)
-    );
-
-    // Ghi lại mảng sản phẩm đã cập nhật vào file products.json
-    fs.writeFileSync(filePath, JSON.stringify(updatedProducts), "utf8");
-
-    // Trả về danh sách sản phẩm mới sau khi đã xóa
-    return NextResponse.json(updatedProducts);
-  } catch (error: any) {
-    // Trả về phản hồi lỗi
-    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-}
 
 export async function PUT(
   req: NextRequest,
